@@ -9,33 +9,89 @@
 
     <ImageView
         android:id="@+id/image"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/login_image"
         android:layout_width="match_parent"
-        android:layout_height="200dp" />
+        android:layout_height="200dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/login_image" />
 
     <EditText
-        android:textColorHint="@color/white_trans"
-        android:textColor="@color/white"
-        android:inputType="textEmailAddress"
         android:id="@+id/main_email"
-        android:hint="Email Id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/image"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="50dp"
-        android:layout_below="@id/image"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:background="@drawable/custom_border"
+        android:drawableLeft="@drawable/email_online"
+        android:drawablePadding="10dp"
+        android:hint="Email Id"
+        android:inputType="textEmailAddress"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="10dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white_trans" />
 
     <EditText
-        android:textColorHint="@color/white_trans"
-        android:textColor="@color/white"
-        android:inputType="textPassword"
         android:id="@+id/main_password"
-        android:hint="Password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/main_email"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="20dp"
-        android:layout_below="@id/main_email"
+        android:background="@drawable/custom_border"
+        android:drawableLeft="@drawable/password"
+        android:drawablePadding="10dp"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="10dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white_trans" />
+
+    <CheckBox
+        android:id="@+id/main_remeber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/main_password"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:buttonTint="@color/white_trans"
+        android:text="Remember me"
+        android:textColor="@color/white_trans" />
+
+    <Button
+        android:id="@+id/main_login"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_below="@id/main_remeber"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        app:backgroundTint="@null"
+        android:background="@drawable/custom_button_white"
+        android:text="Log In"
+        android:textColor="#FE83A7"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/main_signup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/main_login"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        app:backgroundTint="@null"
+        android:background="@drawable/custom_button_red"
+        android:text="Sign Up"
+        android:textColor="@color/white_trans"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/main_signup"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Forget your password"
+        android:textColor="@color/white_trans" />
 
 </RelativeLayout>
