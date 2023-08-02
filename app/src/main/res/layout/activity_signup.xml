@@ -66,12 +66,49 @@
             android:hint="Confirm Password"
             android:inputType="textPassword" />
 
+        <RadioGroup
+            android:id="@+id/signup_gender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/signup_confirm_password"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/signup_male"
+                style="@style/radio_16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Male" />
+
+            <RadioButton
+                android:id="@+id/signup_female"
+                style="@style/radio_16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Female" />
+
+        </RadioGroup>
+
+        <Spinner
+            android:popupBackground="@color/pink_red"
+            android:background="@color/white_trans"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_below="@id/signup_gender"
+            android:id="@+id/signup_city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
         <Button
             android:id="@+id/signup_signup"
             style="@style/button_16_white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/signup_confirm_password"
+            android:layout_below="@id/signup_city"
             android:layout_marginTop="@dimen/_20sdp"
             android:text="Sign Up" />
 
