@@ -3,6 +3,8 @@ package online.internship;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -36,11 +38,17 @@ public class SignupActivity extends AppCompatActivity {
     Calendar calendar;
 
     String sCity;
+    String sGender;
+    SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+
+        db = openOrCreateDatabase("Online_Internship", MODE_PRIVATE, null);
+        String tableQuery = "CREATE TABLE IF NOT EXISTS USERS(USERID INTEGER PRIMARY KEY AUTOINCREMENT,NAME VARCHAR(100),EMAIL VARCHAR(100),CONTACT INT(10),PASSWORD VARCHAR(20),GENDER VARCHAR(6),CITY VARCHAR(50),DOB VARCHAR(10))";
+        db.execSQL(tableQuery);
 
         name = findViewById(R.id.signup_name);
         email = findViewById(R.id.signup_email);
@@ -132,7 +140,8 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 RadioButton radioButton = findViewById(i); //i = R.id.signup_male,R.id.signup_female;
-                new CommonMethod(SignupActivity.this, radioButton.getText().toString());
+                sGender = radioButton.getText().toString();
+                new CommonMethod(SignupActivity.this, sGender);
             }
         });
 
@@ -186,23 +195,30 @@ public class SignupActivity extends AppCompatActivity {
                 } else if (!confirmPassword.getText().toString().trim().matches(password.getText().toString().trim())) {
                     confirmPassword.setError("Password Does Not Match");
                 } else if (gender.getCheckedRadioButtonId() == -1) {
-                    new CommonMethod(SignupActivity.this,"Please Select Gender");
-                }
-                else if(sCity.equals("")){
-                    new CommonMethod(SignupActivity.this,"Please Select City");
-                }
-                else if(dob.getText().toString().trim().equals("")){
+                    new CommonMethod(SignupActivity.this, "Please Select Gender");
+                } else if (sCity.equals("")) {
+                    new CommonMethod(SignupActivity.this, "Please Select City");
+                } else if (dob.getText().toString().trim().equals("")) {
                     dob.setError("Please Select Date of Birth");
-                }
-                else {
-                    System.out.println("Signup Successfully");
-                    //Toast.makeText(MainActivity.this, "Login Successfully", Toast.LENGTH_LONG).show();
-                    new CommonMethod(SignupActivity.this, "Signup Successfully");
-                    //Snackbar.make(view, "Login Successfully", Snackbar.LENGTH_SHORT).show();
-                    new CommonMethod(view, "Login Successfully");
+                } else {
+
+                    String selectQuery = "SELECT * FROM USERS WHERE EMAIL='" + email.getText().toString() + "' OR CONTACT='" + contact.getText().toString() + "'";
+                    Cursor cursor = db.rawQuery(selectQuery, null);
+                    if (cursor.getCount() > 0) {
+                        new CommonMethod(SignupActivity.this,"Email Id/Contact No. Already Registered");
+                    } else {
+                        String insertQuery = "INSERT INTO USERS VALUES(NULL,'" + name.getText().toString() + "','" + email.getText().toString() + "','" + contact.getText().toString() + "','" + password.getText().toString() + "','" + sGender + "','" + sCity + "','" + dob.getText().toString() + "')";
+                        db.execSQL(insertQuery);
+
+                        System.out.println("Signup Successfully");
+                        //Toast.makeText(MainActivity.this, "Login Successfully", Toast.LENGTH_LONG).show();
+                        new CommonMethod(SignupActivity.this, "Signup Successfully");
+                        //Snackbar.make(view, "Login Successfully", Snackbar.LENGTH_SHORT).show();
+                        new CommonMethod(view, "Login Successfully");
                     /*Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                     startActivity(intent);*/
-                    onBackPressed();
+                        onBackPressed();
+                    }
                 }
             }
         });
