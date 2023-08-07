@@ -11,4 +11,5 @@ public class ConstantSp {
     public static String GENDER = "gender";
     public static String CITY = "city";
     public static String DOB = "dob";
+    public static String REMEMBER = "remember";
 }

@@ -33,7 +33,7 @@ public class HomeActivity extends AppCompatActivity {
 
     EditText name, email, contact, dob;
 
-    //RadioButton male,female;
+    RadioButton male,female;
     RadioGroup gender;
 
     Spinner city;
@@ -145,6 +145,8 @@ public class HomeActivity extends AppCompatActivity {
 
 
         gender = findViewById(R.id.home_gender);
+        male = findViewById(R.id.home_male);
+        female = findViewById(R.id.home_female);
         gender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -154,17 +156,15 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        /*male = findViewById(R.id.home_male);
-        female = findViewById(R.id.home_female);*/
-
         updateProfile = findViewById(R.id.home_update_profile);
         logout = findViewById(R.id.home_logout);
-        /*logout.setOnClickListener(new View.OnClickListener() {
+        logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
+                sp.edit().clear().commit();
+                new CommonMethod(HomeActivity.this,MainActivity.class);
             }
-        });*/
+        });
 
         updateProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -211,5 +211,33 @@ public class HomeActivity extends AppCompatActivity {
         email.setText(sp.getString(ConstantSp.EMAIL,""));
         contact.setText(sp.getString(ConstantSp.CONTACT,""));
         dob.setText(sp.getString(ConstantSp.DOB,""));
+
+        //male.setChecked(true);
+        sGender = sp.getString(ConstantSp.GENDER,"");
+        if(sGender.equalsIgnoreCase("Male")){
+            male.setChecked(true);
+        }
+        else if(sGender.equalsIgnoreCase("Female")){
+            female.setChecked(true);
+        }
+        else{
+
+        }
+
+        //city.setSelection(2);
+        sCity = sp.getString(ConstantSp.CITY,"");
+        int iCityPosition = 0;
+        for(int i=0;i<arrayList.size();i++){
+            if(sCity.equalsIgnoreCase(arrayList.get(i))){
+                iCityPosition = i;
+            }
+        }
+        city.setSelection(iCityPosition);
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        finishAffinity();
     }
 }

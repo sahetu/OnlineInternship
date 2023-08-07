@@ -28,23 +28,47 @@
             android:hint="Email Id"
             android:inputType="textEmailAddress" />
 
-        <EditText
-            android:id="@+id/main_password"
-            style="@style/edit_16"
+        <FrameLayout
+            android:id="@+id/main_password_frame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/main_email"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:drawableLeft="@drawable/password"
-            android:hint="Password"
-            android:inputType="textPassword" />
+            android:layout_marginTop="@dimen/_20sdp">
+
+            <EditText
+                android:id="@+id/main_password"
+                style="@style/edit_16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/password"
+                android:hint="Password"
+                android:inputType="textPassword" />
+
+            <ImageView
+                android:id="@+id/main_password_hide"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_gravity="center_vertical|end"
+                android:layout_marginRight="@dimen/_40sdp"
+                android:src="@drawable/password_hide" />
+
+            <ImageView
+                android:visibility="gone"
+                android:id="@+id/main_password_show"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_gravity="center_vertical|end"
+                android:layout_marginRight="@dimen/_40sdp"
+                android:src="@drawable/password_show" />
+
+        </FrameLayout>
 
         <CheckBox
             android:id="@+id/main_remeber"
             style="@style/check_14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/main_password"
+            android:layout_below="@id/main_password_frame"
             android:layout_marginLeft="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:text="Remember me" />
@@ -60,21 +84,21 @@
 
         <Button
             android:id="@+id/main_signup"
+            style="@style/button_16_red"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/main_login"
             android:layout_marginTop="@dimen/_20sdp"
-            style="@style/button_16_red"
             android:text="Sign Up" />
 
         <TextView
+            style="@style/text_14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/main_signup"
             android:layout_marginLeft="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_20sdp"
-            android:text="Forget your password"
-            style="@style/text_14" />
+            android:text="Forget your password" />
 
     </RelativeLayout>
 
