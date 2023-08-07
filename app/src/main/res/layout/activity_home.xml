@@ -1,9 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeActivity">
+    android:background="@drawable/custom_background"
+    tools:context=".MainActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/home_name"
+            style="@style/edit_16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:drawableLeft="@drawable/email_online"
+            android:hint="Name"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/home_email"
+            style="@style/edit_16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/home_name"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:drawableLeft="@drawable/email_online"
+            android:hint="Email Id"
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:id="@+id/home_contact"
+            style="@style/edit_16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/home_email"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:drawableLeft="@drawable/email_online"
+            android:hint="Contact No."
+            android:inputType="phone"
+            android:maxLength="10" />
+
+        <RadioGroup
+            android:id="@+id/home_gender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/home_contact"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/home_male"
+                style="@style/radio_16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Male" />
+
+            <RadioButton
+                android:id="@+id/home_female"
+                style="@style/radio_16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Female" />
+
+        </RadioGroup>
+
+        <Spinner
+            android:id="@+id/home_city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/home_gender"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:background="@color/white_trans"
+            android:popupBackground="@color/pink_red" />
+
+        <EditText
+            android:id="@+id/home_dob"
+            style="@style/edit_16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/home_city"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:drawableLeft="@drawable/email_online"
+            android:editable="false"
+            android:hint="Date Of Birth"
+            android:inputType="textPersonName" />
+
+        <Button
+            android:id="@+id/home_update_profile"
+            style="@style/button_16_white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/home_dob"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:text="Update Profile" />
+
+        <Button
+            android:id="@+id/home_logout"
+            style="@style/button_16_red"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/home_update_profile"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:text="Logout" />
+
+    </RelativeLayout>
+
+</ScrollView>
