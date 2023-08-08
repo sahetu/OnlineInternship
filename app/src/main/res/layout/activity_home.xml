@@ -94,11 +94,21 @@
             android:inputType="textPersonName" />
 
         <Button
-            android:id="@+id/home_update_profile"
+            android:id="@+id/home_edit_profile"
             style="@style/button_16_white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/home_dob"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:text="Edit Profile" />
+
+        <Button
+            android:visibility="gone"
+            android:id="@+id/home_update_profile"
+            style="@style/button_16_white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/home_edit_profile"
             android:layout_marginTop="@dimen/_20sdp"
             android:text="Update Profile" />
 

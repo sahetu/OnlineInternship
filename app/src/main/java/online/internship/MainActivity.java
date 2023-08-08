@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
                         new CommonMethod(view, "Login Successfully");
                         /*Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                         startActivity(intent);*/
-                        new CommonMethod(MainActivity.this, HomeActivity.class);
+                        new CommonMethod(MainActivity.this, DashboardActivity.class);
                     } else {
                         new CommonMethod(MainActivity.this, "Login Unsuccessfully");
                     }
