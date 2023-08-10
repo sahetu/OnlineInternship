@@ -30,7 +30,7 @@
             android:name=".SignupActivity"
             android:exported="false" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".ProfileFragment"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
