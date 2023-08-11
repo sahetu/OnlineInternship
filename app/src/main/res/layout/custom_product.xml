@@ -9,6 +9,7 @@
     android:layout_marginVertical="@dimen/_7sdp">
 
     <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/_5sdp">
@@ -18,14 +19,28 @@
             android:layout_width="@dimen/_80sdp"
             android:layout_height="@dimen/_80sdp" />
 
-        <TextView
-            android:textColor="@color/black"
-            android:id="@+id/custom_product_name"
-            style="@style/text_14"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <LinearLayout
             android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/_10sdp" />
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textColor="@color/black"
+                android:id="@+id/custom_product_name"
+                style="@style/text_14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:textColor="@color/black"
+                android:id="@+id/custom_product_price"
+                style="@style/text_14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

@@ -12,4 +12,12 @@ public class ConstantSp {
     public static String CITY = "city";
     public static String DOB = "dob";
     public static String REMEMBER = "remember";
+
+    public static String PRODUCT_NAME = "product_name";
+    public static String PRODUCT_IMAGE = "product_image";
+    public static String PRODUCT_PRICE = "product_price";
+    public static String PRODUCT_DESC = "product_desc";
+
+    public static String PRICE_SYMBOL = "₹";
+
 }

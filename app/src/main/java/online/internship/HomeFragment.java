@@ -15,9 +15,17 @@ import android.view.ViewGroup;
 public class HomeFragment extends Fragment {
 
     RecyclerView recyclerView;
-    String[] nameArray = {"Person 1","Person 2","Person 3"};
-    int[] imageArray = {R.drawable.ic_home,R.drawable.ic_user,R.drawable.login_image};
+    String[] nameArray = {"Makeup Kit","Cloth","Butter","Bread"};
+    int[] imageArray = {R.drawable.makup_kit,R.drawable.cloth,R.drawable.butter,R.drawable.bread};
 
+    String[] priceArray = {"4000","2000","150","50"};
+
+    String[] descArray = {
+            "What does a makeup kit consist of? Ideally, a complete makeup kit consists of a moisturizer, skin tint (like foundation or tinted primer), concealer, lip product, bronzer, blush, and mascara.",
+            "Piece of cloth - a separate part consisting of fabric. piece of material. bib - top part of an apron; covering the chest. chamois cloth - a piece of chamois used for washing windows or cars. dishcloth, dishrag - a cloth for washing dishes.",
+            "Butter, a yellow-to-white solid emulsion of fat globules, water, and inorganic salts produced by churning the cream from cows' milk. Butter has long been used as a spread and as a cooking fat. It is an important edible fat in northern Europe, North America, and other places where cattle are the primary dairy animals.",
+            "Bread, baked food product made of flour or meal that is moistened, kneaded, and sometimes fermented. A major food since prehistoric times, it has been made in various forms using a variety of ingredients and methods throughout the world."
+    };
 
     public HomeFragment() {
         // Required empty public constructor
@@ -42,7 +50,7 @@ public class HomeFragment extends Fragment {
 
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        ProductAdapter adapter = new ProductAdapter(getActivity(),nameArray,imageArray);
+        ProductAdapter adapter = new ProductAdapter(getActivity(),nameArray,imageArray,priceArray,descArray);
         recyclerView.setAdapter(adapter);
 
         return view;
