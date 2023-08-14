@@ -1,7 +1,5 @@
 package online.internship;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,16 +8,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.razorpay.Checkout;
-import com.razorpay.PaymentResultListener;
+import com.razorpay.PaymentData;
+import com.razorpay.PaymentResultWithDataListener;
 
 import org.json.JSONObject;
 
-public class ProductDetailActivity extends AppCompatActivity implements PaymentResultListener {
+public class ProductDetailActivity extends AppCompatActivity implements PaymentResultWithDataListener {
 
     ImageView imageView;
-    TextView name,price,desc;
+    TextView name, price, desc;
     Button buyNow;
     SharedPreferences sp;
     Checkout checkout;
@@ -29,7 +31,7 @@ public class ProductDetailActivity extends AppCompatActivity implements PaymentR
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
 
-        sp = getSharedPreferences(ConstantSp.PREF,MODE_PRIVATE);
+        sp = getSharedPreferences(ConstantSp.PREF, MODE_PRIVATE);
 
         name = findViewById(R.id.product_detail_name);
         imageView = findViewById(R.id.product_detail_image);
@@ -37,16 +39,13 @@ public class ProductDetailActivity extends AppCompatActivity implements PaymentR
         desc = findViewById(R.id.product_detail_desc);
         buyNow = findViewById(R.id.product_detail_buy_now);
 
-        name.setText(sp.getString(ConstantSp.PRODUCT_NAME,""));
-        imageView.setImageResource(sp.getInt(ConstantSp.PRODUCT_IMAGE,0));
-        price.setText(ConstantSp.PRICE_SYMBOL+sp.getString(ConstantSp.PRODUCT_PRICE,""));
+        name.setText(sp.getString(ConstantSp.PRODUCT_NAME, ""));
+        imageView.setImageResource(sp.getInt(ConstantSp.PRODUCT_IMAGE, 0));
+        price.setText(ConstantSp.PRICE_SYMBOL + sp.getString(ConstantSp.PRODUCT_PRICE, ""));
 
-        desc.setText(sp.getString(ConstantSp.PRODUCT_DESC,""));
+        desc.setText(sp.getString(ConstantSp.PRODUCT_DESC, ""));
 
         Checkout.preload(getApplicationContext());
-
-        checkout = new Checkout();
-        checkout.setKeyID("rzp_test_xsiOz9lYtWKHgF");
 
         buyNow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,43 +56,59 @@ public class ProductDetailActivity extends AppCompatActivity implements PaymentR
 
     }
 
-    private void startPayment() {
+    public void startPayment() {
+        /*
+          You need to pass current activity in order to let Razorpay create CheckoutActivity
+         */
         final Activity activity = this;
 
-        /**
-         * Pass your payment options to the Razorpay Checkout as a JSONObject
-         */
+        final Checkout co = new Checkout();
+
+        co.setKeyID("rzp_test_xsiOz9lYtWKHgF");
+
         try {
             JSONObject options = new JSONObject();
-
-            options.put("name", "Merchant Name");
-            options.put("description", "Reference No. #123456");
-            options.put("image", "https://s3.amazonaws.com/rzp-mobile/images/rzp.jpg");
-            options.put("order_id", "order_DBJOWzybf0sJbb");//from response of step 3.
-            options.put("theme.color", "#3399cc");
+            options.put("name", getResources().getString(R.string.app_name));
+            options.put("description", "Online Order Payment");
+            options.put("send_sms_hash", true);
+            options.put("allow_rotation", true);
+            //You can omit the image option to fetch the image from dashboard
+            options.put("image", "https://cdn-icons-png.flaticon.com/512/1933/1933833.png");
             options.put("currency", "INR");
-            options.put("amount", "50000");//pass amount in currency subunits
-            options.put("prefill.email", "gaurav.kumar@example.com");
-            options.put("prefill.contact","9988776655");
-            JSONObject retryObj = new JSONObject();
-            retryObj.put("enabled", true);
-            retryObj.put("max_count", 4);
-            options.put("retry", retryObj);
+            options.put("amount", Integer.parseInt(sp.getString(ConstantSp.PRODUCT_PRICE, ""))*100);
 
-            checkout.open(activity, options);
+            JSONObject preFill = new JSONObject();
+            preFill.put("email", sp.getString(ConstantSp.EMAIL,""));
+            preFill.put("contact", sp.getString(ConstantSp.CONTACT,""));
 
-        } catch(Exception e) {
-            Log.e("RESPONSE", "Error in starting Razorpay Checkout", e);
+            options.put("prefill", preFill);
+
+            co.open(activity, options);
+        } catch (Exception e) {
+            Toast.makeText(activity, "Error in payment: " + e.getMessage(), Toast.LENGTH_SHORT)
+                    .show();
+            e.printStackTrace();
         }
     }
 
     @Override
-    public void onPaymentSuccess(String s) {
-        new CommonMethod(ProductDetailActivity.this,"Payment Success");
+    public void onPaymentSuccess(String s, PaymentData paymentData) {
+        try {
+            Toast.makeText(this, "Payment Successful :\nPayment ID: " + s + "\nPayment Data: " + paymentData.getData(), Toast.LENGTH_SHORT).show();
+            Log.d("RESPONSE_SUCCESS", "Payment Successful :\nPayment ID: " + s + "\nPayment Data: " + paymentData.getData());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public void onPaymentError(int i, String s) {
-        new CommonMethod(ProductDetailActivity.this,"Payment Failed");
+    public void onPaymentError(int i, String s, PaymentData paymentData) {
+        try {
+            Toast.makeText(this, "Payment Failed:\nPayment Data: " + paymentData.getData(), Toast.LENGTH_SHORT).show();
+            Log.d("RESPONSE_FAIL", "Payment Failed:\nPayment Data: " + paymentData.getData());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
 }
