@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
 public class HomeFragment extends Fragment {
 
     RecyclerView recyclerView;
@@ -26,6 +28,13 @@ public class HomeFragment extends Fragment {
             "Butter, a yellow-to-white solid emulsion of fat globules, water, and inorganic salts produced by churning the cream from cows' milk. Butter has long been used as a spread and as a cooking fat. It is an important edible fat in northern Europe, North America, and other places where cattle are the primary dairy animals.",
             "Bread, baked food product made of flour or meal that is moistened, kneaded, and sometimes fermented. A major food since prehistoric times, it has been made in various forms using a variety of ingredients and methods throughout the world."
     };
+
+    RecyclerView categoryRecyclerview;
+    String[] categoryNameArray = {"Bakery","Health","Travel","Beauty","Fashion","Food"};
+    int[] categoryImageArray = {R.drawable.bakery,R.drawable.health,R.drawable.travel,R.drawable.beauty,R.drawable.fashion,R.drawable.food_drink};
+
+    ArrayList<CategoryList> arrayList;
+
 
     public HomeFragment() {
         // Required empty public constructor
@@ -52,6 +61,20 @@ public class HomeFragment extends Fragment {
 
         ProductAdapter adapter = new ProductAdapter(getActivity(),nameArray,imageArray,priceArray,descArray);
         recyclerView.setAdapter(adapter);
+
+        categoryRecyclerview = view.findViewById(R.id.home_recyclerview_category);
+        categoryRecyclerview.setLayoutManager(new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.HORIZONTAL));
+        categoryRecyclerview.setItemAnimator(new DefaultItemAnimator());
+
+        arrayList = new ArrayList<>();
+        for(int i=0;i<categoryNameArray.length;i++){
+            CategoryList list = new CategoryList();
+            list.setName(categoryNameArray[i]);
+            list.setImage(categoryImageArray[i]);
+            arrayList.add(list);
+        }
+        CategoryAdapter catAdapter = new CategoryAdapter(getActivity(),arrayList);
+        categoryRecyclerview.setAdapter(catAdapter);
 
         return view;
     }

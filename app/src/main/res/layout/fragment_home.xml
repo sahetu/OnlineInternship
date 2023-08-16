@@ -6,8 +6,15 @@
     tools:context=".HomeFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/home_recyclerview"
+        android:id="@+id/home_recyclerview_category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/home_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/home_recyclerview_category"
+        android:layout_marginTop="@dimen/_10sdp" />
 
 </RelativeLayout>
