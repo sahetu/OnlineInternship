@@ -12,7 +12,9 @@ public class DashboardActivity extends AppCompatActivity {
     MeowBottomNavigation mBottomNavigation;
 
     int HOME_MENU = 1;
-    int PROFILE_MENU = 2;
+    int WISHLIST_MENU = 2;
+    int CART_MENU = 3;
+    int PROFILE_MENU = 4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,23 +24,34 @@ public class DashboardActivity extends AppCompatActivity {
         mBottomNavigation = findViewById(R.id.dashboard_bottom);
 
         mBottomNavigation.add(new MeowBottomNavigation.Model(HOME_MENU, R.drawable.ic_home));
+        mBottomNavigation.add(new MeowBottomNavigation.Model(WISHLIST_MENU, R.drawable.ic_wishlist));
+        mBottomNavigation.add(new MeowBottomNavigation.Model(CART_MENU, R.drawable.ic_cart));
         mBottomNavigation.add(new MeowBottomNavigation.Model(PROFILE_MENU, R.drawable.ic_user));
 
         mBottomNavigation.setOnClickMenuListener(new MeowBottomNavigation.ClickListener() {
             @Override
             public void onClickItem(MeowBottomNavigation.Model item) {
                 // your codes
-                if(item.getId()==HOME_MENU){
+                if (item.getId() == HOME_MENU) {
                     FragmentManager manager = getSupportFragmentManager();
-                    manager.beginTransaction().replace(R.id.dashboard_relative,new HomeFragment()).commit();
-                    mBottomNavigation.show(HOME_MENU,true);
+                    manager.beginTransaction().replace(R.id.dashboard_relative, new HomeFragment()).commit();
+                    mBottomNavigation.show(HOME_MENU, true);
                 }
-                else if(item.getId()==PROFILE_MENU){
+                else if (item.getId() == CART_MENU) {
                     FragmentManager manager = getSupportFragmentManager();
-                    manager.beginTransaction().replace(R.id.dashboard_relative,new ProfileFragment()).commit();
-                    mBottomNavigation.show(PROFILE_MENU,true);
+                    manager.beginTransaction().replace(R.id.dashboard_relative, new CartFragment()).commit();
+                    mBottomNavigation.show(CART_MENU, true);
                 }
-                else{
+                else if (item.getId() == WISHLIST_MENU) {
+                    FragmentManager manager = getSupportFragmentManager();
+                    manager.beginTransaction().replace(R.id.dashboard_relative, new WishlistFragment()).commit();
+                    mBottomNavigation.show(WISHLIST_MENU, true);
+                }
+                else if (item.getId() == PROFILE_MENU) {
+                    FragmentManager manager = getSupportFragmentManager();
+                    manager.beginTransaction().replace(R.id.dashboard_relative, new ProfileFragment()).commit();
+                    mBottomNavigation.show(PROFILE_MENU, true);
+                } else {
 
                 }
             }
@@ -59,8 +72,8 @@ public class DashboardActivity extends AppCompatActivity {
         });
 
         FragmentManager manager = getSupportFragmentManager();
-        manager.beginTransaction().replace(R.id.dashboard_relative,new HomeFragment()).commit();
-        mBottomNavigation.show(HOME_MENU,true);
+        manager.beginTransaction().replace(R.id.dashboard_relative, new HomeFragment()).commit();
+        mBottomNavigation.show(HOME_MENU, true);
 
     }
 }
