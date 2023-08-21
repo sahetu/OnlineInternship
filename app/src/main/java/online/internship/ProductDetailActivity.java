@@ -24,7 +24,7 @@ public class ProductDetailActivity extends AppCompatActivity implements PaymentR
 
     ImageView imageView;
     TextView name, price, desc;
-    Button buyNow,addCart,addWishlist;
+    Button buyNow,addCart,addWishlist,removeWishlist;
     SharedPreferences sp;
 
     SQLiteDatabase db;
@@ -81,6 +81,31 @@ public class ProductDetailActivity extends AppCompatActivity implements PaymentR
         });
 
         addWishlist = findViewById(R.id.product_detail_wishlist);
+        removeWishlist = findViewById(R.id.product_detail_wishlist_remove);
+
+        String selectQuery = "SELECT * FROM WISHLIST WHERE USERID='"+sp.getString(ConstantSp.ID,"")+"' AND PRODUCTID='"+sp.getString(ConstantSp.PRODUCT_ID,"")+"'";
+        Cursor cursor = db.rawQuery(selectQuery,null);
+        if(cursor.getCount()>0){
+            addWishlist.setVisibility(View.GONE);
+            removeWishlist.setVisibility(View.VISIBLE);
+        }
+        else {
+            addWishlist.setVisibility(View.VISIBLE);
+            removeWishlist.setVisibility(View.GONE);
+        }
+
+        removeWishlist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String deleteQuery = "DELETE FROM WISHLIST WHERE USERID='"+sp.getString(ConstantSp.ID,"")+"' AND PRODUCTID='"+sp.getString(ConstantSp.PRODUCT_ID,"")+"'";
+                db.execSQL(deleteQuery);
+                new CommonMethod(ProductDetailActivity.this,"Product Removed From Wishlist");
+                addWishlist.setVisibility(View.VISIBLE);
+                removeWishlist.setVisibility(View.GONE);
+            }
+        });
+
+
         addWishlist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,6 +118,8 @@ public class ProductDetailActivity extends AppCompatActivity implements PaymentR
                     String insertQuery = "INSERT INTO WISHLIST VALUES(NULL,'" + sp.getString(ConstantSp.ID, "") + "','" + sp.getString(ConstantSp.PRODUCT_ID, "") + "','" + sp.getString(ConstantSp.PRODUCT_NAME, "") + "','" + sp.getInt(ConstantSp.PRODUCT_IMAGE, 0) + "','" + sp.getString(ConstantSp.PRODUCT_DESC, "") + "','" + sp.getString(ConstantSp.PRODUCT_PRICE, "") + "')";
                     db.execSQL(insertQuery);
                     new CommonMethod(ProductDetailActivity.this, "Product Added In Wishlist Successfully");
+                    addWishlist.setVisibility(View.GONE);
+                    removeWishlist.setVisibility(View.VISIBLE);
                 }
             }
         });
