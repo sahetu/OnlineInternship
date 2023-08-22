@@ -24,8 +24,8 @@ public class DashboardActivity extends AppCompatActivity {
         mBottomNavigation = findViewById(R.id.dashboard_bottom);
 
         mBottomNavigation.add(new MeowBottomNavigation.Model(HOME_MENU, R.drawable.ic_home));
-        mBottomNavigation.add(new MeowBottomNavigation.Model(WISHLIST_MENU, R.drawable.ic_wishlist));
         mBottomNavigation.add(new MeowBottomNavigation.Model(CART_MENU, R.drawable.ic_cart));
+        mBottomNavigation.add(new MeowBottomNavigation.Model(WISHLIST_MENU, R.drawable.ic_wishlist));
         mBottomNavigation.add(new MeowBottomNavigation.Model(PROFILE_MENU, R.drawable.ic_user));
 
         mBottomNavigation.setOnClickMenuListener(new MeowBottomNavigation.ClickListener() {
