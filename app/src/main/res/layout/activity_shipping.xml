@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/custom_background"
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/shipping_name"
+            style="@style/edit_16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:hint="Name"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/shipping_email"
+            style="@style/edit_16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/shipping_name"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:hint="Email Id"
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:id="@+id/shipping_contact"
+            style="@style/edit_16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/shipping_email"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:hint="Contact No."
+            android:inputType="phone"
+            android:maxLength="10" />
+
+        <EditText
+            android:id="@+id/shipping_address"
+            style="@style/edit_16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/shipping_contact"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:gravity="start"
+            android:hint="Address"
+            android:minLines="2" />
+
+        <Spinner
+            android:id="@+id/shipping_city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/shipping_address"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:background="@color/white_trans"
+            android:popupBackground="@color/pink_red" />
+
+        <RadioGroup
+            android:id="@+id/shipping_payment_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/shipping_city"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/shipping_cod"
+                style="@style/radio_16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Cash On Delivery" />
+
+            <RadioButton
+                android:id="@+id/shipping_online"
+                style="@style/radio_16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Online" />
+
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/shipping_continue"
+            style="@style/button_16_white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/shipping_payment_type"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:text="Continue" />
+
+
+    </RelativeLayout>
+
+</ScrollView>

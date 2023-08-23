@@ -38,6 +38,7 @@ public class DashboardActivity extends AppCompatActivity {
                     mBottomNavigation.show(HOME_MENU, true);
                 }
                 else if (item.getId() == CART_MENU) {
+                    CartFragment.iTotalPrice = 0;
                     FragmentManager manager = getSupportFragmentManager();
                     manager.beginTransaction().replace(R.id.dashboard_relative, new CartFragment()).commit();
                     mBottomNavigation.show(CART_MENU, true);

@@ -98,6 +98,13 @@ public class CartFragment extends Fragment {
             emptyLayout.setVisibility(View.VISIBLE);
         }
 
+        checkout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new CommonMethod(getActivity(),ShippingActivity.class);
+            }
+        });
+
         return view;
     }
 }
