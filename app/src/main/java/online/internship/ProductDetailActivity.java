@@ -64,7 +64,7 @@ public class ProductDetailActivity extends AppCompatActivity implements PaymentR
         addCart = findViewById(R.id.product_detail_add_cart);
         removeCart = findViewById(R.id.product_detail_remove_cart);
 
-        String selectCartQuery = "SELECT * FROM CART WHERE USERID='"+sp.getString(ConstantSp.ID,"")+"' AND PRODUCTID='"+sp.getString(ConstantSp.PRODUCT_ID,"")+"'";
+        String selectCartQuery = "SELECT * FROM CART WHERE USERID='"+sp.getString(ConstantSp.ID,"")+"' AND PRODUCTID='"+sp.getString(ConstantSp.PRODUCT_ID,"")+"' AND ORDERID='0'";
         Cursor cursorCart = db.rawQuery(selectCartQuery,null);
         if(cursorCart.getCount()>0){
             addCart.setVisibility(View.GONE);
@@ -98,7 +98,7 @@ public class ProductDetailActivity extends AppCompatActivity implements PaymentR
         removeCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String deleteQuery = "DELETE FROM CART WHERE USERID='"+sp.getString(ConstantSp.ID,"")+"' AND PRODUCTID='"+sp.getString(ConstantSp.PRODUCT_ID,"")+"'";
+                String deleteQuery = "DELETE FROM CART WHERE USERID='"+sp.getString(ConstantSp.ID,"")+"' AND PRODUCTID='"+sp.getString(ConstantSp.PRODUCT_ID,"")+"' AND ORDERID='0'";
                 db.execSQL(deleteQuery);
                 new CommonMethod(ProductDetailActivity.this,"Product Removed From Cart");
                 addCart.setVisibility(View.VISIBLE);
