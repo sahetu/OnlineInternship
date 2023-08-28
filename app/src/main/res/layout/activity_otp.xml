@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/custom_background"
+    android:orientation="vertical"
+    tools:context=".OtpActivity">
+
+    <EditText
+        android:id="@+id/otp_edit"
+        style="@style/edit_16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:hint="OTP"
+        android:inputType="number"
+        android:maxLength="6" />
+
+    <Button
+        android:id="@+id/otp_submit"
+        style="@style/button_16_white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:text="Submit" />
+
+    <TextView
+        android:id="@+id/otp_resend"
+        android:padding="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_gravity="center"
+        android:text="Resend Otp"
+        style="@style/text_14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

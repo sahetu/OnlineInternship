@@ -21,4 +21,6 @@ public class ConstantSp {
 
     public static String PRICE_SYMBOL = "₹";
 
+    public static String OTP_CODE = "otp_code";
+
 }

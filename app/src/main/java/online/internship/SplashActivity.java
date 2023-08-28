@@ -35,7 +35,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
                 if(sp.getString(ConstantSp.REMEMBER,"").equalsIgnoreCase("")) {
-                    new CommonMethod(SplashActivity.this, MainActivity.class);
+                    new CommonMethod(SplashActivity.this, LoginWithOtpActivity.class);
                 }
                 else{
                     new CommonMethod(SplashActivity.this, DashboardActivity.class);
